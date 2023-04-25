@@ -1,4 +1,4 @@
-package com.example.springsecurity.config;
+package com.example.springsecurity.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.example.springsecurity.constants.ErrorCodeConstant;
@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * UserAuthenticationEntryPoint
+ * 未登录处理
  *
  * @author 李二帅
  * @since 2023/4/25 11:02
  */
-public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,

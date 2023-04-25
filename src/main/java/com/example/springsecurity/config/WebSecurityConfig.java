@@ -3,8 +3,8 @@ package com.example.springsecurity.config;
 import com.example.springsecurity.filter.JWTAuthenticationFilter;
 import com.example.springsecurity.properties.AuthProperties;
 import com.example.springsecurity.service.JWTService;
+import com.example.springsecurity.service.impl.AuthenticationEntryPointImpl;
 import com.example.springsecurity.service.impl.SysUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -17,7 +17,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserCache;
 import org.springframework.security.core.userdetails.cache.SpringCacheBasedUserCache;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -60,7 +59,7 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated())
                 .addFilter(new JWTAuthenticationFilter(authenticationManager, sysUserService, jwtService, userCache()))
                 // 自定义异常处理
-                .exceptionHandling().authenticationEntryPoint(new UserAuthenticationEntryPoint()).and()
+                .exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPointImpl()).and()
                 // 认证用户时用户信息加载配置，注入springAuthUserService
                 .userDetailsService(sysUserService).build();
     }

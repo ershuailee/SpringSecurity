@@ -12,6 +12,7 @@ public class RoleAuthority implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
+
         return null;
     }
 }
