@@ -2,8 +2,8 @@ package com.example.springsecurity.service.impl;
 
 import com.example.springsecurity.enums.BusinessErrorCodes;
 import com.example.springsecurity.exception.BusinessException;
-import com.example.springsecurity.info.AuthRequestVO;
-import com.example.springsecurity.info.AuthResponseVO;
+import com.example.springsecurity.dto.AuthRequestDTO;
+import com.example.springsecurity.vo.AuthResponseVO;
 import com.example.springsecurity.service.JWTService;
 import com.example.springsecurity.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,22 +33,12 @@ public class UserServiceImpl implements UserService {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public AuthResponseVO login(AuthRequestVO requestVO) {
+    public AuthResponseVO login(AuthRequestDTO requestVO) {
 
         String username = requestVO.getUsername();
         String password = requestVO.getPassword();
 
-        authenticate(username, password);
-
-        String token = jwtService.generateToken(username);
-
-        AuthResponseVO responseVO = new AuthResponseVO();
-        responseVO.setToken(token);
-        return responseVO;
-    }
-
-    @Override
-    public void authenticate(String username, String password) {
+        // 进行用户认证
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password));
@@ -56,6 +46,22 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             throw new BusinessException(BusinessErrorCodes.PASSWORD_ERROR);
         }
+
+        // 认证通过生成token
+        String token = jwtService.generateToken(username);
+
+
+        AuthResponseVO responseVO = new AuthResponseVO();
+        responseVO.setUsername(username);
+        responseVO.setToken(token);
+
+        return responseVO;
     }
+
+
+    public void authenticate(String username, String password) {
+
+    }
+
 
 }

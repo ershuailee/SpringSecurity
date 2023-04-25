@@ -59,6 +59,7 @@ public class WebSecurityConfig {
                         // 其他地址的访问均需验证权限
                         .anyRequest().authenticated())
                 .addFilter(new JWTAuthenticationFilter(authenticationManager, sysUserService, jwtService, userCache()))
+                // 自定义异常处理
                 .exceptionHandling().authenticationEntryPoint(new UserAuthenticationEntryPoint()).and()
                 // 认证用户时用户信息加载配置，注入springAuthUserService
                 .userDetailsService(sysUserService).build();
@@ -75,7 +76,6 @@ public class WebSecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
 
     /**
      * 密码明文加密方式配置（使用国密SM4）

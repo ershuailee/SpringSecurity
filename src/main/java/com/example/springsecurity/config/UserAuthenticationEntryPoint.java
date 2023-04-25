@@ -26,10 +26,9 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpStatus.OK.value());
-        // ApiResult<T> apiResult = new ApiResult<>(ErrorCodeConstant.INVALID_TOKEN,
-        //         BusinessErrorCodes.INVALID_TOKEN.getMessage(), null);
-
-        // response.getWriter().write(JSON.toJSONString(apiResult));
+        ApiResult<Object> apiResult = new ApiResult<>(ErrorCodeConstant.INVALID_TOKEN,
+                BusinessErrorCodes.INVALID_TOKEN.getMessage(), null);
+        response.getWriter().write(JSON.toJSONString(apiResult));
         response.getWriter().flush();
 
     }

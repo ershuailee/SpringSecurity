@@ -1,8 +1,8 @@
 package com.example.springsecurity.service;
 
 import com.example.springsecurity.exception.BusinessException;
-import com.example.springsecurity.info.AuthRequestVO;
-import com.example.springsecurity.info.AuthResponseVO;
+import com.example.springsecurity.dto.AuthRequestDTO;
+import com.example.springsecurity.vo.AuthResponseVO;
 
 /**
  * <p>
@@ -15,7 +15,7 @@ import com.example.springsecurity.info.AuthResponseVO;
 public interface UserService {
 
 
-    AuthResponseVO login(AuthRequestVO requestVO) throws BusinessException;
+    AuthResponseVO login(AuthRequestDTO requestVO);
 
-    void authenticate(String username, String password) throws BusinessException;
+    void authenticate(String username, String password);
 }

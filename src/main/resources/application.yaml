@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.35.48.78:3306/smart_lighting?useUnicode=true&useSSL=false&characterEncoding=utf8
+    url: jdbc:mysql://101.35.48.78:3306/test?useUnicode=true&useSSL=false&characterEncoding=utf8
     username: root
     password: 123456Aa#
   mvc:
@@ -28,7 +28,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #用户自定义配置
-lc:
+les:
   security:
 
     #静态资源放行

@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2023/4/25 11:01
  */
 @Data
-@ConfigurationProperties(prefix = "lc.security")
+@ConfigurationProperties(prefix = "les.security")
 public class AuthProperties {
 
     private JWT jwt;
