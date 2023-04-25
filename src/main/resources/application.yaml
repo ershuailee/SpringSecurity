@@ -1,0 +1,64 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://101.35.48.78:3306/smart_lighting?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: 123456Aa#
+  mvc:
+    path match:
+      matching-strategy: ANT_PATH_MATCHER
+  # redis配置
+  redis:
+    database: 0
+    host: 101.35.48.78
+    port: 6379
+    password: 123456Aa#
+    timeout: 5000
+
+# mybatis-plus配置
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#用户自定义配置
+lc:
+  security:
+
+    #静态资源放行
+    permit-static:
+      - /*.html
+      - /*.html
+      - /favicon.ico
+      - /**/*.html
+      - /**/*.css
+      - /**/*.js
+      - /**/*.png
+      - /**/*.jpg
+      - /**/*.ttf
+      - /**/*.woff
+      - /**/*.wav
+      - /**/*.gif
+      - /swagger-ui.html
+
+    #方法放行
+    permit-method:
+      - /swagger-resources
+      - /v3/api-docs
+      - /user/login
+
+    jwt:
+      auth-header: Authorization
+      secret: mySecret
+      type: forever
+      claims:
+        issuer: LES
+        audience: Web
+        subject: Auth
+        expiration-time-minutes: 3000
