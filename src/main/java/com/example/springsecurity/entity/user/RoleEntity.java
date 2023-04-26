@@ -1,4 +1,4 @@
-package com.example.springsecurity.entity;
+package com.example.springsecurity.entity.user;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.springsecurity.entity.common.BaseEntity;
@@ -16,26 +16,23 @@ import lombok.experimental.Accessors;
 import java.time.LocalDateTime;
 
 /**
- * 用户表
+ * 角色表
  *
  * @author 李二帅
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("user")
-@ApiModel(value = "UserEntity对象", description = "用户表")
-public class UserEntity extends BaseEntity {
+@TableName("role")
+@ApiModel(value = "RoleEntity对象", description = "角色表")
+public class RoleEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户名")
-    private String username;
+    @ApiModelProperty(value = "角色名")
+    private String name;
 
-    @ApiModelProperty(value = "用户密码")
-    private String password;
-
-    @ApiModelProperty(value = "状态0-无效，1-有效")
+    @ApiModelProperty(value = "角色状态0-无效，1-有效")
     private Boolean status;
 
     @ApiModelProperty(value = "创建人主键")

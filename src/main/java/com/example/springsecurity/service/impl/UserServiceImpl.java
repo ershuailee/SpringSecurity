@@ -1,14 +1,20 @@
 package com.example.springsecurity.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.springsecurity.batchmapper.UserBatchMapper;
 import com.example.springsecurity.dto.AuthRequestDTO;
 import com.example.springsecurity.dto.UserRegisterDTO;
-import com.example.springsecurity.entity.UserEntity;
+import com.example.springsecurity.entity.common.BaseEntity;
+import com.example.springsecurity.entity.user.MenuEntity;
+import com.example.springsecurity.entity.user.RoleEntity;
+import com.example.springsecurity.entity.user.UserEntity;
 import com.example.springsecurity.enums.BusinessErrorCodes;
 import com.example.springsecurity.exception.BusinessException;
 import com.example.springsecurity.service.JWTService;
+import com.example.springsecurity.service.MenuService;
+import com.example.springsecurity.service.RoleService;
 import com.example.springsecurity.service.UserService;
 import com.example.springsecurity.vo.AuthResponseVO;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +28,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -43,6 +52,13 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private JWTService jwtService;
+
+    @Resource
+    private RoleService roleService;
+
+    @Resource
+    private MenuService menuService;
+
 
     /**
      * 用户注册
@@ -102,6 +118,28 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 获取用户权限列表
+     *
+     * @param userId 用户ID
+     * @return 权限列表
+     */
+    @Override
+    public List<MenuEntity> getPermissions(Long userId) {
+
+        if (userId == null) {
+            return new ArrayList<>();
+        }
+        List<RoleEntity> roleList = roleService.getRoleByUserId(userId);
+
+        if (roleList == null) {
+            return new ArrayList<>();
+        }
+        List<Long> roleIds = roleList.stream().map(BaseEntity::getId).collect(Collectors.toList());
+
+        return menuService.getUserMenuByRoleId(roleIds);
+    }
+
+    /**
      * 通过用户名查询用户数据
      *
      * @param username 用户名
@@ -114,4 +152,36 @@ public class UserServiceImpl implements UserService {
         return userBatchMapper.getOne(wrapper);
     }
 
+    /**
+     * 构建查询 query wrapper
+     *
+     * @param param 查询条件entity
+     * @return 对应的query wrapper
+     */
+    private QueryWrapper<UserEntity> getConditionsByEntity(UserEntity param) {
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda()
+                // 主键
+                .eq(param.getId() != null, UserEntity::getId, param.getId())
+                // 用户名
+                .eq(!StringUtils.isEmpty(param.getUsername()), UserEntity::getUsername, param.getUsername())
+                // 用户密码
+                .eq(!StringUtils.isEmpty(param.getPassword()), UserEntity::getPassword, param.getPassword())
+                // 状态0-无效，1-有效
+                .eq(param.getStatus() != null, UserEntity::getStatus, param.getStatus())
+                // 创建人主键
+                .eq(param.getCreateId() != null, UserEntity::getCreateId, param.getCreateId())
+                // 创建时间
+                .eq(param.getCreateTime() != null, UserEntity::getCreateTime, param.getCreateTime())
+                // 更新人主键
+                .eq(param.getUpdateId() != null, UserEntity::getUpdateId, param.getUpdateId())
+                // 更新时间
+                .eq(param.getUpdateTime() != null, UserEntity::getUpdateTime, param.getUpdateTime())
+                // 删除标记:0-正常,1-删除
+                .eq(param.getDeleteFlag() != null, UserEntity::getDeleteFlag, param.getDeleteFlag())
+                // 备注
+                .eq(!StringUtils.isEmpty(param.getRemark()), UserEntity::getRemark, param.getRemark())
+        ;
+        return queryWrapper;
+    }
 }
