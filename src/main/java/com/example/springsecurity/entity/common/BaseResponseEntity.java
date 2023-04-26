@@ -1,4 +1,4 @@
-package com.example.springsecurity.entity;
+package com.example.springsecurity.entity.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

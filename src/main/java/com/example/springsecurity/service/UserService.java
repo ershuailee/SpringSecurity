@@ -1,7 +1,7 @@
 package com.example.springsecurity.service;
 
-import com.example.springsecurity.exception.BusinessException;
 import com.example.springsecurity.dto.AuthRequestDTO;
+import com.example.springsecurity.dto.UserRegisterDTO;
 import com.example.springsecurity.vo.AuthResponseVO;
 
 /**
@@ -14,8 +14,19 @@ import com.example.springsecurity.vo.AuthResponseVO;
  */
 public interface UserService {
 
+    /**
+     * 用户注册
+     *
+     * @param user 用户注册信息
+     */
+    void register(UserRegisterDTO user);
 
+    /**
+     * 用户登录
+     *
+     * @param requestVO 请求参数
+     * @return 登录数据
+     */
     AuthResponseVO login(AuthRequestDTO requestVO);
 
-    void authenticate(String username, String password);
 }

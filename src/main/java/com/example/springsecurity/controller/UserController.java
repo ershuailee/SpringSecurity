@@ -1,16 +1,13 @@
 package com.example.springsecurity.controller;
 
-import com.example.springsecurity.enums.BusinessErrorCodes;
-import com.example.springsecurity.exception.BusinessException;
+import com.example.springsecurity.dto.UserRegisterDTO;
+import com.example.springsecurity.entity.common.UserInfo;
 import com.example.springsecurity.dto.AuthRequestDTO;
 import com.example.springsecurity.vo.AuthResponseVO;
 import com.example.springsecurity.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -25,18 +22,27 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/user")
 @Api(tags = "用户控制")
-public class UserController {
+public class UserController extends BaseController {
 
     @Resource
     private UserService userService;
 
+    @PostMapping("/register")
+    @ApiOperation(value = "用户注册", notes = "用户注册", httpMethod = "POST")
+    public void register(@RequestBody UserRegisterDTO user) {
+        userService.register(user);
+    }
+
     @PostMapping("/login")
     @ApiOperation(value = "用户登录", notes = "用户登录", httpMethod = "POST")
     public AuthResponseVO login(@RequestBody AuthRequestDTO dto) {
-        try {
-            return userService.login(dto);
-        } catch (BusinessException e) {
-            throw new BusinessException(BusinessErrorCodes.INVALID_TOKEN);
-        }
+        return userService.login(dto);
     }
+
+    @GetMapping("/getPermissions")
+    @ApiOperation(value = "获取用户权限列表", notes = "获取用户权限列表", httpMethod = "GET")
+    public UserInfo getPermissions() {
+        return getUserDetails();
+    }
+
 }

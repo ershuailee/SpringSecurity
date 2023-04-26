@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.List;
 
 /**
- * AuthProperties
+ * SpringSecurity配置类
  *
  * @author 李二帅
  * @since 2023/4/25 11:01

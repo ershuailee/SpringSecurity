@@ -2,9 +2,9 @@ package com.example.springsecurity.filter;
 
 import com.alibaba.fastjson2.JSON;
 import com.example.springsecurity.constants.ErrorCodeConstant;
-import com.example.springsecurity.entity.ApiResult;
+import com.example.springsecurity.entity.common.ResultEntity;
 import com.example.springsecurity.enums.BusinessErrorCodes;
-import com.example.springsecurity.info.UserInfo;
+import com.example.springsecurity.entity.common.UserInfo;
 import com.example.springsecurity.service.JWTService;
 import com.example.springsecurity.service.impl.SysUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -71,9 +71,9 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             } catch (UsernameNotFoundException e) {
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 response.setStatus(HttpStatus.OK.value());
-                ApiResult<Object> apiResult = new ApiResult<>(ErrorCodeConstant.INTERNAL_SERVER_ERROR,
+                ResultEntity<Object> resultEntity = new ResultEntity<>(ErrorCodeConstant.INTERNAL_SERVER_ERROR,
                         BusinessErrorCodes.DEFAULT_BUSINESS_ERROR.getMessage(), null);
-                response.getWriter().write(JSON.toJSONString(apiResult));
+                response.getWriter().write(JSON.toJSONString(resultEntity));
                 response.getWriter().flush();
                 return;
             }

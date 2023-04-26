@@ -1,9 +1,10 @@
-package com.example.springsecurity.info;
+package com.example.springsecurity.entity.common;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -19,6 +20,9 @@ import java.util.List;
 @ApiModel("用户")
 public class UserInfo implements UserDetails {
 
+    @ApiModelProperty(notes = "用户id")
+    private Long userId;
+
     @ApiModelProperty(notes = "用户名")
     private String username;
 
@@ -28,11 +32,12 @@ public class UserInfo implements UserDetails {
     @ApiModelProperty(notes = "是否启用：true-启用，false-停用")
     private boolean enabled = true;
 
-    private List<RoleAuthority> authorities;
+    private List<SimpleGrantedAuthority> grantedAuthorities;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return grantedAuthorities;
     }
 
     @Override

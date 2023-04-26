@@ -2,8 +2,8 @@ package com.example.springsecurity.handler;
 
 
 import com.example.springsecurity.constants.ErrorCodeConstant;
-import com.example.springsecurity.entity.ApiResult;
-import com.example.springsecurity.entity.BaseResponseEntity;
+import com.example.springsecurity.entity.common.ResultEntity;
+import com.example.springsecurity.entity.common.BaseResponseEntity;
 import com.example.springsecurity.enums.BusinessErrorCodes;
 import com.example.springsecurity.exception.BusinessException;
 import lombok.NonNull;
@@ -25,7 +25,7 @@ public class GlobalApiHandler implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, @NonNull Class converterType) {
-        return !returnType.getGenericParameterType().equals(ApiResult.class) &&
+        return !returnType.getGenericParameterType().equals(ResultEntity.class) &&
                 !returnType.getDeclaringClass().equals(Docket.class);
     }
 

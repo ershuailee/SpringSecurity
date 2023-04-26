@@ -51,6 +51,7 @@ les:
     permit-method:
       - /swagger-resources
       - /v3/api-docs
+      - /user/register
       - /user/login
 
     jwt:

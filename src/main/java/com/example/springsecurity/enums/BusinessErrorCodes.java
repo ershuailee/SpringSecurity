@@ -22,7 +22,7 @@ public enum BusinessErrorCodes {
      */
     USER_NAME_HAS_EXISTED("userNameHasExisted", "用户名称已存在"),
     USER_NOT_EXISTS("userNotExists", "用户不存在"),
-    PASSWORD_ERROR("passwordError", "密码错误"),
+    PASSWORD_ERROR("passwordError", "用户名或密码错误"),
     ACCOUNT_LOCKED("accountLocked", "账号锁定"),
     INVALID_TOKEN("invalidToken", "登陆失效"),
     ;

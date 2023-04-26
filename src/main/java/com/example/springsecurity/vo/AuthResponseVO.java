@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 public class AuthResponseVO {
 
     @ApiModelProperty(value = "用户ID")
-    private Integer id;
+    private Long userId;
 
     @ApiModelProperty(value = "用户名")
     private String username;
