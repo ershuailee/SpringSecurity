@@ -5,6 +5,8 @@ import lombok.Getter;
 @Getter
 public enum BusinessErrorCodes {
 
+    SUCCESS("success", "success"),
+
     /**
      * 业务异常
      */

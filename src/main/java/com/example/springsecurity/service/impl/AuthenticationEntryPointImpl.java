@@ -2,7 +2,7 @@ package com.example.springsecurity.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.example.springsecurity.constants.ErrorCodeConstant;
-import com.example.springsecurity.entity.common.ResultEntity;
+import com.example.springsecurity.entity.common.BaseResponseEntity;
 import com.example.springsecurity.enums.BusinessErrorCodes;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
@@ -26,9 +26,9 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
 
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpStatus.OK.value());
-        ResultEntity<Object> resultEntity = new ResultEntity<>(ErrorCodeConstant.INVALID_TOKEN,
+        BaseResponseEntity<Object> baseResponseEntity = new BaseResponseEntity<>(ErrorCodeConstant.INVALID_TOKEN,
                 BusinessErrorCodes.INVALID_TOKEN.getMessage(), null);
-        response.getWriter().write(JSON.toJSONString(resultEntity));
+        response.getWriter().write(JSON.toJSONString(baseResponseEntity));
         response.getWriter().flush();
 
     }

@@ -3,6 +3,11 @@ package com.example.springsecurity.constants;
 public class ErrorCodeConstant {
 
     /**
+     * 调用成功返回code
+     */
+    public static final String SUCCESS_CODE = "0000";
+
+    /**
      * 系统内部异常
      */
     public static final String INTERNAL_SERVER_ERROR = "0001";
