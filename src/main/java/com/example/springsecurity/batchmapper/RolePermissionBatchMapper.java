@@ -1,7 +1,7 @@
 package com.example.springsecurity.batchmapper;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.springsecurity.entity.user.RoleMenuEntity;
+import com.example.springsecurity.entity.user.RolePermissionEntity;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.example.springsecurity.entity.user.RoleMenuEntity;
  * @author 李二帅
  * @since 2023-04-26
  */
-public interface RoleMenuBatchMapper extends IService<RoleMenuEntity> {
+public interface RolePermissionBatchMapper extends IService<RolePermissionEntity> {
 
 }

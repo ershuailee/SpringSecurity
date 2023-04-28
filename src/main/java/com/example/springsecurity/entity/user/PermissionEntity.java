@@ -23,14 +23,14 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("menu")
-@ApiModel(value = "MenuEntity对象", description = "菜单表")
-public class MenuEntity extends BaseEntity {
+@TableName("permission")
+@ApiModel(value = "PermissionEntity对象", description = "菜单表")
+public class PermissionEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "菜单名")
-    private String menuName;
+    private String permissionName;
 
     @ApiModelProperty(value = "路由地址")
     private String path;

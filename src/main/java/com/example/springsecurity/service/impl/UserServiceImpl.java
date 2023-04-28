@@ -7,13 +7,13 @@ import com.example.springsecurity.batchmapper.UserBatchMapper;
 import com.example.springsecurity.dto.AuthRequestDTO;
 import com.example.springsecurity.dto.UserRegisterDTO;
 import com.example.springsecurity.entity.common.BaseEntity;
-import com.example.springsecurity.entity.user.MenuEntity;
+import com.example.springsecurity.entity.user.PermissionEntity;
 import com.example.springsecurity.entity.user.RoleEntity;
 import com.example.springsecurity.entity.user.UserEntity;
 import com.example.springsecurity.enums.BusinessErrorCodes;
 import com.example.springsecurity.exception.BusinessException;
 import com.example.springsecurity.service.JWTService;
-import com.example.springsecurity.service.MenuService;
+import com.example.springsecurity.service.PermissionService;
 import com.example.springsecurity.service.RoleService;
 import com.example.springsecurity.service.UserService;
 import com.example.springsecurity.vo.AuthResponseVO;
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     private RoleService roleService;
 
     @Resource
-    private MenuService menuService;
+    private PermissionService permissionService;
 
 
     /**
@@ -124,7 +124,7 @@ public class UserServiceImpl implements UserService {
      * @return 权限列表
      */
     @Override
-    public List<MenuEntity> getPermissions(Long userId) {
+    public List<PermissionEntity> getPermissions(Long userId) {
 
         if (userId == null) {
             return new ArrayList<>();
@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
         }
         List<Long> roleIds = roleList.stream().map(BaseEntity::getId).collect(Collectors.toList());
 
-        return menuService.getUserMenuByRoleId(roleIds);
+        return permissionService.getUserMenuByRoleId(roleIds);
     }
 
     /**

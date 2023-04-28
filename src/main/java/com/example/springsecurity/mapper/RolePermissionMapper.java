@@ -1,7 +1,7 @@
 package com.example.springsecurity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.springsecurity.entity.user.RoleMenuEntity;
+import com.example.springsecurity.entity.user.RolePermissionEntity;
 
 /**
  * <p>
@@ -10,6 +10,6 @@ import com.example.springsecurity.entity.user.RoleMenuEntity;
  *
  * @author 李二帅
  */
-public interface RoleMenuMapper extends BaseMapper<RoleMenuEntity> {
+public interface RolePermissionMapper extends BaseMapper<RolePermissionEntity> {
 
 }

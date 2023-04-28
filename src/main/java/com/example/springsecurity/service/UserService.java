@@ -2,7 +2,7 @@ package com.example.springsecurity.service;
 
 import com.example.springsecurity.dto.AuthRequestDTO;
 import com.example.springsecurity.dto.UserRegisterDTO;
-import com.example.springsecurity.entity.user.MenuEntity;
+import com.example.springsecurity.entity.user.PermissionEntity;
 import com.example.springsecurity.vo.AuthResponseVO;
 
 import java.util.List;
@@ -38,5 +38,5 @@ public interface UserService {
      * @param userId 用户ID
      * @return 权限列表
      */
-    List<MenuEntity> getPermissions(Long userId);
+    List<PermissionEntity> getPermissions(Long userId);
 }

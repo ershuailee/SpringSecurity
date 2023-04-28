@@ -1,8 +1,7 @@
-package com.example.springsecurity.entity.user;
+package com.example.springsecurity.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,9 +14,8 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@TableName("role_menu")
-@ApiModel(value = "RoleMenuEntity对象", description = "角色菜单关联表")
-public class RoleMenuEntity {
+@ApiModel(value = "RolePermissionVO", description = "角色菜单关联表")
+public class RolePermissionVO {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +24,6 @@ public class RoleMenuEntity {
     private Long roleId;
 
     @ApiModelProperty(value = "菜单id")
-    private Long menuId;
-
+    private Long permissionId;
 
 }
