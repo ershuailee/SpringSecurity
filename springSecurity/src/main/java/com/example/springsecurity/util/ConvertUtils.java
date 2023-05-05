@@ -1,4 +1,4 @@
-package com.example.springsecurity.utils;
+package com.example.springsecurity.util;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;

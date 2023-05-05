@@ -1,7 +1,7 @@
 package com.example.springsecurity.config;
 
 import com.example.springsecurity.filter.JWTAuthenticationFilter;
-import com.example.springsecurity.properties.AuthProperties;
+import com.example.springsecurity.propertie.AuthProperties;
 import com.example.springsecurity.service.JWTService;
 import com.example.springsecurity.service.impl.AuthenticationEntryPointImpl;
 import com.example.springsecurity.service.impl.SysUserService;

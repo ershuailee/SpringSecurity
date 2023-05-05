@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.springsecurity.batchmapper.UserBatchMapper;
 import com.example.springsecurity.entity.user.UserEntity;
 import com.example.springsecurity.entity.user.UserInfo;
-import com.example.springsecurity.utils.ConvertUtils;
+import com.example.springsecurity.util.ConvertUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

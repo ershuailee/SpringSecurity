@@ -1,4 +1,4 @@
-package com.example.springsecurity.properties;
+package com.example.springsecurity.propertie;
 
 import lombok.Data;
 import lombok.Getter;

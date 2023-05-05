@@ -1,7 +1,7 @@
 package com.example.springsecurity.service.impl;
 
 import com.example.springsecurity.exception.BusinessException;
-import com.example.springsecurity.properties.AuthProperties;
+import com.example.springsecurity.propertie.AuthProperties;
 import com.example.springsecurity.service.JWTService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

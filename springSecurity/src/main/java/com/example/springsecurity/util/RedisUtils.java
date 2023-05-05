@@ -1,4 +1,4 @@
-package com.example.springsecurity.utils;
+package com.example.springsecurity.util;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * @since 2023/4/22 13:37
  */
 @Component
-public class RedisUtil {
+public class RedisUtils {
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;

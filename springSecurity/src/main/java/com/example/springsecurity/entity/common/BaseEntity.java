@@ -1,39 +1,33 @@
-package com.example.springsecurity.entity.user;
+package com.example.springsecurity.entity.common;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.example.springsecurity.entity.common.BaseEntity;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
 /**
- * 角色表
+ * <p>
+ * 通用基础实体类
+ * </p>
  *
  * @author 李二帅
+ * @since 2023-03-28
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-@Accessors(chain = true)
-@TableName("role")
-@ApiModel(value = "RoleEntity对象", description = "角色表")
-public class RoleEntity extends BaseEntity {
+public class BaseEntity {
 
-    private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty(value = "角色名")
-    private String name;
-
-    @ApiModelProperty(value = "角色状态0-无效，1-有效")
-    private Boolean status;
+    @TableId(type = IdType.ASSIGN_ID)
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long id;
 
     @ApiModelProperty(value = "创建人主键")
     private Long createId;
@@ -56,5 +50,6 @@ public class RoleEntity extends BaseEntity {
     @ApiModelProperty(value = "备注")
     private String remark;
 
-
+    @TableLogic
+    private Integer deleteFlag = 0;
 }

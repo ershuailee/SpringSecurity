@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.springsecurity.batchmapper.UserBatchMapper;
 import com.example.springsecurity.dto.AuthRequestDTO;
 import com.example.springsecurity.dto.UserRegisterDTO;
-import com.example.springsecurity.entity.common.BaseEntity;
 import com.example.springsecurity.entity.user.PermissionEntity;
 import com.example.springsecurity.entity.user.RoleEntity;
 import com.example.springsecurity.entity.user.UserEntity;
@@ -134,7 +133,7 @@ public class UserServiceImpl implements UserService {
         if (roleList == null) {
             return new ArrayList<>();
         }
-        List<Long> roleIds = roleList.stream().map(BaseEntity::getId).collect(Collectors.toList());
+        List<Long> roleIds = roleList.stream().map(RoleEntity::getId).collect(Collectors.toList());
 
         return permissionService.getUserMenuByRoleId(roleIds);
     }
