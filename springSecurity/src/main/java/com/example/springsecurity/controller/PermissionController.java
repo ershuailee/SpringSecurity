@@ -1,16 +1,14 @@
 package com.example.springsecurity.controller;
 
 import com.example.springsecurity.dto.PermissionDTO;
-import com.example.springsecurity.dto.RolePermissionDTO;
 import com.example.springsecurity.service.PermissionService;
-import com.example.springsecurity.service.RolePermissionService;
-import com.example.springsecurity.vo.PermissionVO;
-import com.example.springsecurity.vo.RolePermissionVO;
+import com.example.springsecurity.vo.PermissionTreeVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -22,37 +20,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/permission")
 @Api(tags = "权限控制类")
-public class PermissionController {
+public class PermissionController extends BaseController {
 
     @Resource
     private PermissionService permissionService;
 
-    @Resource
-    private RolePermissionService rolePermissionService;
-
-    @PostMapping("/addPermission")
-    @ApiOperation(value = "新增权限", notes = "新增权限", httpMethod = "POST")
-    public void addPermission(@RequestBody PermissionDTO dto) {
-        permissionService.addPermission(dto);
+    @PostMapping("/insertPermission")
+    @ApiOperation(value = "新增权限数据", notes = "新增权限数据", httpMethod = "POST")
+    public void insertPermission(@RequestBody PermissionDTO dto) {
+        dto.setCreateId(getUserDetails().getUserId());
+        dto.setCreateTime(LocalDateTime.now());
+        permissionService.insertPermission(dto);
     }
 
-    @GetMapping("/getPermission")
-    @ApiOperation(value = "获取权限树", notes = "获取权限树", httpMethod = "GET")
-    public List<PermissionVO> getPermission() {
-        return permissionService.getPermission();
+    @GetMapping("/getAllPermissions")
+    @ApiOperation(value = "获取所有权限列表", notes = "获取所有权限列表", httpMethod = "GET")
+    public List<PermissionTreeVO> listAllPermissions() {
+        return permissionService.listAllPermissions();
     }
 
-    @PostMapping("/addRolePermission")
-    @ApiOperation(value = "角色新增权限", notes = "角色新增权限", httpMethod = "POST")
-    public void addRolePermission(@RequestBody RolePermissionDTO dto) {
-        rolePermissionService.addRolePermission(dto);
+    @GetMapping("/listPermissionsByUserId")
+    @ApiOperation(value = "根据用户获取用户权限列表", notes = "根据用户获取用户权限列表", httpMethod = "GET")
+    public List<PermissionTreeVO> listPermissionsByUserId() {
+        return permissionService.listPermissionsByUserId(getUserDetails().getUserId());
     }
-
-    @GetMapping("/getRolePermission")
-    @ApiOperation(value = "根据角色ID查询角色权限", notes = "根据角色ID查询角色权限", httpMethod = "GET")
-    public List<RolePermissionVO> getRolePermission(Long id) {
-        return rolePermissionService.getRolePermission(id);
-    }
-
 
 }

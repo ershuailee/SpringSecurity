@@ -1,20 +1,30 @@
 package com.example.springsecurity.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.springsecurity.batchmapper.PermissionBatchMapper;
 import com.example.springsecurity.dto.PermissionDTO;
 import com.example.springsecurity.entity.user.PermissionEntity;
+import com.example.springsecurity.entity.user.RoleEntity;
 import com.example.springsecurity.entity.user.RolePermissionEntity;
+import com.example.springsecurity.enums.BusinessErrorCodes;
+import com.example.springsecurity.exception.BusinessException;
 import com.example.springsecurity.service.PermissionService;
 import com.example.springsecurity.service.RolePermissionService;
-import com.example.springsecurity.vo.PermissionVO;
+import com.example.springsecurity.service.RoleService;
+import com.example.springsecurity.util.ConvertUtils;
+import com.example.springsecurity.vo.PermissionTreeVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -34,86 +44,89 @@ public class PermissionServiceImpl implements PermissionService {
     @Resource
     private RolePermissionService rolePermissionService;
 
+    @Resource
+    private RoleService roleService;
+
     /**
-     * 新增权限
+     * 新增权限数据
      *
-     * @param dto 请求参数
+     * @param dto 请求数据
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void addPermission(PermissionDTO dto) {
+    public void insertPermission(PermissionDTO dto) {
+        PermissionEntity permission = ConvertUtils.convert(dto, PermissionEntity.class);
 
-
-
+        if (!permissionBatchMapper.save(permission)) {
+            throw new BusinessException(BusinessErrorCodes.INSERT_FAILED);
+        }
     }
 
     /**
-     * 获取权限树
+     * 获取全部权限数据
      *
      * @return 权限树
      */
     @Override
-    public List<PermissionVO> getPermission() {
-        return null;
+    public List<PermissionTreeVO> listAllPermissions() {
+        List<PermissionEntity> list = permissionBatchMapper.list();
+        return encapsulationPermissionVo(list, 0L);
     }
 
     /**
-     * 通过角色ID列表查询角色数据
+     * 获取用户权限列表
      *
-     * @param roleIds 角色ID列表
-     * @return 角色按钮权限
+     * @param userId 用户ID
+     * @return 权限列表
      */
     @Override
-    public List<PermissionEntity> getUserMenuByRoleId(List<Long> roleIds) {
-        // 根据角色ID查询按钮ID
+    public List<PermissionTreeVO> listPermissionsByUserId(Long userId) {
+
+        // 根据用户ID查询角色数据
+        if (userId == null) {
+            return new ArrayList<>();
+        }
+        List<RoleEntity> roleList = roleService.getRoleByUserId(userId);
+
+        if (roleList == null) {
+            return new ArrayList<>();
+        }
+        List<Long> roleIds = roleList.stream().map(RoleEntity::getId).collect(Collectors.toList());
+
+        // 根据角色ID查询权限ID
         List<RolePermissionEntity> rolePermissionEntityList = rolePermissionService.listByRoleIds(roleIds);
+        List<Long> permissionIds = rolePermissionEntityList.stream()
+                .map(RolePermissionEntity::getPermissionId).collect(Collectors.toList());
 
-        // 根据按钮ID查询按钮数据
-        List<Long> menuIds = rolePermissionEntityList.stream().map(RolePermissionEntity::getPermissionId).toList();
-        return permissionBatchMapper.listByIds(menuIds);
+        // 查询权限数据
+        List<PermissionEntity> list = permissionBatchMapper.listByIds(permissionIds);
+        // 0L：表示根节点的父ID
+        return encapsulationPermissionVo(list, 0L);
     }
-
 
     /**
-     * 构建查询 query wrapper
+     * 封装权限视图
      *
-     * @param param 查询条件entity
-     * @return 对应的query wrapper
+     * @param allPermission 所有权限列表
+     * @param parentId      父节点ID
+     * @return 权限树
      */
-    private QueryWrapper<PermissionEntity> getConditionsByEntity(PermissionEntity param) {
-        QueryWrapper<PermissionEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda()
-                // 主键
-                .eq(param.getId() != null, PermissionEntity::getId, param.getId())
-                // 菜单名
-                .eq(!StringUtils.isEmpty(param.getPermissionName()), PermissionEntity::getPermissionName,
-                        param.getPermissionName())
-                // 路由地址
-                .eq(!StringUtils.isEmpty(param.getPath()), PermissionEntity::getPath, param.getPath())
-                // 组件路径
-                .eq(!StringUtils.isEmpty(param.getComponent()), PermissionEntity::getComponent, param.getComponent())
-                // 菜单状态（0显示 1隐藏）
-                .eq(param.getVisible() != null, PermissionEntity::getVisible, param.getVisible())
-                // 菜单状态（0正常 1停用）
-                .eq(param.getStatus() != null, PermissionEntity::getStatus, param.getStatus())
-                // 权限标识
-                .eq(!StringUtils.isEmpty(param.getPerms()), PermissionEntity::getPerms, param.getPerms())
-                // 菜单图标
-                .eq(!StringUtils.isEmpty(param.getIcon()), PermissionEntity::getIcon, param.getIcon())
-                // 创建人主键
-                .eq(param.getCreateId() != null, PermissionEntity::getCreateId, param.getCreateId())
-                // 创建时间
-                .eq(param.getCreateTime() != null, PermissionEntity::getCreateTime, param.getCreateTime())
-                // 更新人主键
-                .eq(param.getUpdateId() != null, PermissionEntity::getUpdateId, param.getUpdateId())
-                // 更新时间
-                .eq(param.getUpdateTime() != null, PermissionEntity::getUpdateTime, param.getUpdateTime())
-                // 删除标记:0-正常,1-删除
-                .eq(param.getDeleteFlag() != null, PermissionEntity::getDeleteFlag, param.getDeleteFlag())
-                // 备注
-                .eq(!StringUtils.isEmpty(param.getRemark()), PermissionEntity::getRemark, param.getRemark())
-        ;
-        return queryWrapper;
+    private List<PermissionTreeVO> encapsulationPermissionVo(List<PermissionEntity> allPermission, Long parentId) {
+        List<PermissionTreeVO> resultList = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(allPermission)) {
+            for (PermissionEntity permission : allPermission) {
+                if (Objects.equals(parentId, permission.getParentId())) {
+                    PermissionTreeVO permissionTreeVO = new PermissionTreeVO();
+                    BeanUtils.copyProperties(permission, permissionTreeVO);
+                    //递归查询子菜单，并封装信息
+                    List<PermissionTreeVO> childList = encapsulationPermissionVo(allPermission, permission.getId());
+                    if (!CollectionUtils.isEmpty(childList)) {
+                        permissionTreeVO.setChild(childList);
+                    }
+                    resultList.add(permissionTreeVO);
+                }
+            }
+        }
+        return resultList;
     }
-
 }

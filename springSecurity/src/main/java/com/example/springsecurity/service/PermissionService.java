@@ -1,8 +1,7 @@
 package com.example.springsecurity.service;
 
 import com.example.springsecurity.dto.PermissionDTO;
-import com.example.springsecurity.entity.user.PermissionEntity;
-import com.example.springsecurity.vo.PermissionVO;
+import com.example.springsecurity.vo.PermissionTreeVO;
 
 import java.util.List;
 
@@ -17,27 +16,24 @@ import java.util.List;
 public interface PermissionService {
 
     /**
-     * 新增权限
+     * 新增权限数据
      *
-     * @param dto 请求参数
+     * @param dto 请求数据
      */
-    void addPermission(PermissionDTO dto);
+    void insertPermission(PermissionDTO dto);
 
     /**
-     * 获取权限树
+     * 获取全部权限数据
      *
      * @return 权限树
      */
-    List<PermissionVO> getPermission();
+    List<PermissionTreeVO> listAllPermissions();
 
     /**
-     * 通过角色ID列表查询角色数据
+     * 获取用户权限列表
      *
-     * @param roleIds 角色ID列表
-     * @return 角色按钮权限
+     * @param userId 用户ID
+     * @return 权限列表
      */
-    List<PermissionEntity> getUserMenuByRoleId(List<Long> roleIds);
-
-
-
+    List<PermissionTreeVO> listPermissionsByUserId(Long userId);
 }

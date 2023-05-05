@@ -31,12 +31,4 @@ public interface UserService {
      * @return 登录数据
      */
     AuthResponseVO login(AuthRequestDTO requestVO);
-
-    /**
-     * 获取用户权限列表
-     *
-     * @param userId 用户ID
-     * @return 权限列表
-     */
-    List<PermissionEntity> getPermissions(Long userId);
 }

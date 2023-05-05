@@ -117,28 +117,6 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 获取用户权限列表
-     *
-     * @param userId 用户ID
-     * @return 权限列表
-     */
-    @Override
-    public List<PermissionEntity> getPermissions(Long userId) {
-
-        if (userId == null) {
-            return new ArrayList<>();
-        }
-        List<RoleEntity> roleList = roleService.getRoleByUserId(userId);
-
-        if (roleList == null) {
-            return new ArrayList<>();
-        }
-        List<Long> roleIds = roleList.stream().map(RoleEntity::getId).collect(Collectors.toList());
-
-        return permissionService.getUserMenuByRoleId(roleIds);
-    }
-
-    /**
      * 通过用户名查询用户数据
      *
      * @param username 用户名

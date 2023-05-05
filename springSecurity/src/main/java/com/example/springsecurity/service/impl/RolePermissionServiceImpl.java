@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.springsecurity.batchmapper.RolePermissionBatchMapper;
 import com.example.springsecurity.dto.RolePermissionDTO;
 import com.example.springsecurity.entity.user.RolePermissionEntity;
-import com.example.springsecurity.enums.BusinessErrorCodes;
-import com.example.springsecurity.exception.BusinessException;
 import com.example.springsecurity.service.RolePermissionService;
 import com.example.springsecurity.vo.RolePermissionVO;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**

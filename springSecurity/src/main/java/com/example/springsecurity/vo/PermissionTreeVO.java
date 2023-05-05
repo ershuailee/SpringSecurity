@@ -17,8 +17,8 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value = "Permission对象", description = "菜单表")
-public class PermissionVO extends BaseEntity {
+@ApiModel(value = "PermissionTreeVO", description = "PermissionTreeVO")
+public class PermissionTreeVO extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,5 +49,6 @@ public class PermissionVO extends BaseEntity {
     @ApiModelProperty(value = "节点类型: 0目录，1菜单，2按钮")
     private Integer nodeType;
 
-    List<PermissionVO> child;
+    @ApiModelProperty(value = "子权限")
+    List<PermissionTreeVO> child;
 }
