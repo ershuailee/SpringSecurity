@@ -1,43 +1,43 @@
 <template>
-    <div class="login_from">
-        <h3 class="login_title">
-            系统登录
-        </h3>
-        <div class="login_msg">
-            {{ $route.params.message }}
-        </div>
-        <div class="login_input">
-            <input
-                    v-model="loginForm.username"
-                    class="userName"
-                    placeholder="账号"
-                    type="text"
-            >
-            <input
-                    v-model="loginForm.password"
-                    autoComplete="on"
-                    class="password"
-                    placeholder="密码"
-                    type="password"
-            >
-            <button
-                    class="login_button"
-                    type="button"
-                    @click="login"
-            >
-                登 录
-            </button>
-        </div>
-        <a
-                class="toRegister"
-                @click="toRegister"
-        >没有账号点击注册！</a>
+  <div class="login_from">
+    <h3 class="login_title">
+      系统登录
+    </h3>
+    <div class="login_msg">
+      {{ $route.params.message }}
     </div>
+    <div class="login_input">
+      <input
+          v-model="loginForm.username"
+          class="userName"
+          placeholder="账号"
+          type="text"
+      >
+      <input
+          v-model="loginForm.password"
+          autoComplete="on"
+          class="password"
+          placeholder="密码"
+          type="password"
+      >
+      <button
+          class="login_button"
+          type="button"
+          @click="login"
+      >
+        登 录
+      </button>
+    </div>
+    <a class="toRegister" @click="toRegister">
+      没有账号点击注册！
+    </a>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import router from "@/router";
+import {login} from "@/api/login";
 
 export default {
     name: "Login",
@@ -50,16 +50,21 @@ export default {
         }
     },
     methods: {
-        login() {
-            let params = new Request(this.loginForm.username , this.loginForm.password);
-            // params.append("username", this.loginForm.username)
-            // params.append("password", this.loginForm.password)
-            // 从后端获取数据
-            axios.post('/user/login', params)
-                .then(successResponse => {
-                    console.log(successResponse)
-                }).catch(function (error) {
-            });
+       async login() {
+            // let params = {username: this.loginForm.username, password: this.loginForm.password};
+            // // 从后端获取数据
+            // console.log(params)
+            // axios.post('/user/login', params)
+            //     .then(successResponse => {
+            //         console.log(successResponse)
+            //     }).catch(function (error) {
+            // });
+           let params = {username: this.loginForm.username, password: this.loginForm.password};
+
+            let  a = await login(params)
+           console.log(a,"dfasdfafa")
+
+
         },
 
         toRegister() {

@@ -1,8 +1,6 @@
 package com.example.springsecurity.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.springsecurity.batchmapper.PermissionBatchMapper;
 import com.example.springsecurity.dto.PermissionDTO;
 import com.example.springsecurity.entity.user.PermissionEntity;
