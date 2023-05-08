@@ -1,135 +1,118 @@
 <template>
-  <div class="login_from">
-    <h3 class="login_title">
-      系统登录
-    </h3>
-    <div class="login_msg">
-      {{ $route.params.message }}
+    <div class="login">
+        <div class="login-header">
+            <h1>登&nbsp;陆</h1>
+        </div>
+        <form class="login-form">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" v-model="username" />
+            </div>
+            <div class="form-group">
+                <label for="password">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+                <input type="password" id="password" v-model="password" />
+            </div>
+            <div class="form-group">
+                <button class="login-button" @click.prevent="login">登&nbsp;陆</button>
+            </div>
+        </form>
     </div>
-    <div class="login_input">
-      <input
-          v-model="loginForm.username"
-          class="userName"
-          placeholder="账号"
-          type="text"
-      >
-      <input
-          v-model="loginForm.password"
-          autoComplete="on"
-          class="password"
-          placeholder="密码"
-          type="password"
-      >
-      <button
-          class="login_button"
-          type="button"
-          @click="login"
-      >
-        登 录
-      </button>
-    </div>
-    <a class="toRegister" @click="toRegister">
-      没有账号点击注册！
-    </a>
-  </div>
 </template>
 
 <script>
-import axios from "axios";
-import router from "@/router";
-import {login} from "@/api/login";
+import {login} from "@/axios/login";
 
 export default {
-    name: "Login",
     data() {
         return {
-            loginForm: {
-                username: '',
-                password: ''
-            },
-        }
+            username: '',
+            password: ''
+        };
     },
     methods: {
-       async login() {
-            // let params = {username: this.loginForm.username, password: this.loginForm.password};
-            // // 从后端获取数据
-            // console.log(params)
-            // axios.post('/user/login', params)
-            //     .then(successResponse => {
-            //         console.log(successResponse)
-            //     }).catch(function (error) {
-            // });
-           let params = {username: this.loginForm.username, password: this.loginForm.password};
-
-            let  a = await login(params)
-           console.log(a,"dfasdfafa")
-
-
-        },
-
-        toRegister() {
-            router.push({
-                path: "/register"
-            })
-        },
+        login() {
+            // 在此处编写登陆逻辑
+            let a ={"username":this.username,"password":this.password};
+            login(a)
+        }
     }
-}
+};
 </script>
 
 <style scoped>
-.login_title {
-    margin: 0 auto 30px auto;
-    text-align: center;
-    color: #505458;
+.login {
+    height: 100vh;
+    background: url('@/assets/background.jpeg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.login_msg {
-    text-align: center;
-    color: crimson;
-}
-
-.login_input {
-    position: relative;
-    margin: 0 auto;
-    width: 95%;
-}
-
-.login_input input {
-    margin-top: 30px;
+.login-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 45px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 7px 0 7px 5px;
-    font-size: 20px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+    height: 120px;
+    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-.login_input input:focus {
-    border-color: #66afe9;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
 }
 
-.login_button {
-    width: 407px;
-    height: 45px;
-    font-size: 25px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    position: relative;
-    margin: 30px auto;
-    background: #409EFF;
+.login-form {
+    width: 350px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.toRegister {
-    margin-left: 20px;
-    font-size: 15px;
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+input[type='text'],
+input[type='password'] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.login-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #43cea2;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #185a9d;
 }
 </style>
