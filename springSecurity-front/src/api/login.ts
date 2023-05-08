@@ -7,7 +7,7 @@ export function login(data) {
         url: "/user/login",
         method: "POST",
         headers: {
-            Authorization: null
+            Authorization: null,
         },
         data
     })

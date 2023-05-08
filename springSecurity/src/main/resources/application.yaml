@@ -53,6 +53,7 @@ les:
       - /v3/api-docs
       - /user/register
       - /user/login
+#      - /test
 
     jwt:
       auth-header: Authorization
@@ -62,4 +63,4 @@ les:
         issuer: LES
         audience: Web
         subject: Auth
-        expiration-time-minutes: 1
+        expiration-time-minutes: 1000

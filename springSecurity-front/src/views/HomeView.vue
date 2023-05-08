@@ -5,13 +5,11 @@
     <main>
         <RouterLink to="/login">login</RouterLink>
         <button class="test" @click.prevent="test1">test</button>
-
     </main>
 </template>
 
 <script>
-import {login, test} from "@/api/login";
-import router from "@/router";
+import {test} from "@/api/login";
 
 export default {
     data() {
@@ -27,7 +25,6 @@ export default {
             }).catch(error => {
                 console.error(error);
             })
-
         }
     }
 };
