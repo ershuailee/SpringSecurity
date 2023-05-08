@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import {login} from "@/axios/login";
+import {login} from "@/api/login";
+import router from "@/router";
 
 export default {
     data() {
@@ -30,11 +31,19 @@ export default {
         };
     },
     methods: {
-        login() {
-            // 在此处编写登陆逻辑
-            let a ={"username":this.username,"password":this.password};
-            login(a)
+        login: function () {
+            const loginForm = {"username": this.username, "password": this.password};
+            login(loginForm).then(response => {
+                //使用 localStorage.setItem，将token保存到localStorage
+                localStorage.setItem("token", response.data.token);
+                // 并且跳转到首页
+                router.push('/')
+            }).catch(error => {
+                console.error(error);
+            })
         }
+
+
     }
 };
 </script>

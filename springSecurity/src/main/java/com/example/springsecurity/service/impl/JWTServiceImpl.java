@@ -65,7 +65,9 @@ public class JWTServiceImpl implements JWTService {
      */
     @Override
     public String getToken(HttpServletRequest request) {
-        return request.getHeader(properties.getJwt().getAuthHeader());
+        String header = request.getHeader(properties.getJwt().getAuthHeader());
+        // 截取token部分
+        return header == null ? null : header.substring(header.indexOf(" ") + 1);
     }
 
 }

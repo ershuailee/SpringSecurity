@@ -62,4 +62,4 @@ les:
         issuer: LES
         audience: Web
         subject: Auth
-        expiration-time-minutes: 3000
+        expiration-time-minutes: 1
