@@ -2,7 +2,7 @@
 import service from "../axios";
 
 // 登录接口
-export function login(data) {
+export function login(data: unknown) {
     return service({
         url: "/user/login",
         method: "POST",

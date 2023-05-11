@@ -53,7 +53,7 @@ les:
       - /v3/api-docs
       - /user/register
       - /user/login
-#      - /test
+      - /test
 
     jwt:
       auth-header: Authorization

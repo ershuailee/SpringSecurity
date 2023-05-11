@@ -12,7 +12,6 @@ const service = axios.create({
 // 请求拦截：请求接口的时候，先拦截下来，对你的数据做一个判断，或者携带个token给你
 service.interceptors.request.use((config) => {
     if (config.headers.Authorization !== null) { // 只有Authorization不为null才添加token
-        config.headers = config.headers || {} as AxiosRequestHeaders;
         if (localStorage.getItem("token")) {
             config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
         }
@@ -24,23 +23,23 @@ service.interceptors.request.use((config) => {
 
 //响应拦截：后端返回来的结果
 service.interceptors.response.use((res) => {
-    const code: string = res.data.code//code是后端的状态码
-    switch (code) {
-        case "0000":
-            return Promise.resolve(res.data);
-        case "0001":
-
-            openDialog(dialogConfig);
-            return Promise.reject(res.data.message);
-        case "0002":
-            return Promise.reject(res.data.message);
-        default:
-            break;
+        const code: string = res.data.code; // code 是后端的状态码
+        switch (code) {
+            case "0000":
+                return Promise.resolve(res.data);
+            case "0001":
+                return Promise.reject(res.data.message);
+            case "0002":
+                return Promise.reject(res.data.message);
+            default:
+                return Promise.reject(new Error("Unknown response code"));
+        }
+    },
+    (err) => {
+        // 处理错误响应
+        return Promise.reject(err);
     }
-}, (err) => {
-    // 处理错误响应
-    return Promise.reject(err)
-})
+);
 
 //因为别的地方要用，所以就把实例暴露出去，导出
 export default service
