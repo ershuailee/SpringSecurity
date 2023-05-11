@@ -28,7 +28,8 @@ service.interceptors.response.use((res) => {
             case "0000":
                 return Promise.resolve(res.data);
             case "0001":
-                return Promise.reject(res.data.message);
+                // return Promise.reject(res.data.message);
+                // this.$toast('您已学习过vue3！', 2000);
             case "0002":
                 return Promise.reject(res.data.message);
             default:

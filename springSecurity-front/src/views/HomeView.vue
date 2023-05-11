@@ -1,35 +1,24 @@
-<script setup lang="ts">
-</script>
-
 <template>
-    <main>
-        <RouterLink to="/login">login</RouterLink>
-        <button class="test" @click.prevent="test1">test</button>
-    </main>
+  <main>
+    <RouterLink to="/login">login</RouterLink>
+    <button @click="button">button</button>
+  </main>
 </template>
 
-<script>
-import {test} from "@/api/login";
+<script lang="ts">
+import Message from "@/components/message";
 
 export default {
-    data() {
+    name: 'Counter',
+    setup() {
+
+        function button(): void {
+            Message.info('详情跳转');
+        }
+
         return {
-            username: '',
-            password: ''
+            button,
         };
     },
-    methods: {
-        test1: function () {
-            test().then(response=>{
-                console.log(response)
-            }).catch(error => {
-                console.error(error);
-            })
-        }
-    }
 };
 </script>
-
-<style scoped>
-
-</style>
