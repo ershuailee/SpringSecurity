@@ -14,8 +14,6 @@ const timer = ref<number>(3000);
 
 // 处理数据
 function handleData(type: string, title: string): void {
-    console.log("1111111")
-
     // 数据添加
     messageList.push({type, title});
 
@@ -33,7 +31,7 @@ function handleData(type: string, title: string): void {
         }
     });
 
-    // 容器挂载 如果这里没有 #message dom元素,可以动态创建一个,然后挂载
+    // 容器挂载 动态创建一个,然后挂载
     const divEle = document.createElement('div')
     divEle.setAttribute('id', 'customShowLoading')
     // 让我们节点挂载到一个dom元素上

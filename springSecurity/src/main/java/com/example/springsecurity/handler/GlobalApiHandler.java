@@ -4,6 +4,8 @@ import com.example.springsecurity.constants.ErrorCodeConstant;
 import com.example.springsecurity.entity.common.BaseResponseEntity;
 import com.example.springsecurity.enums.BusinessErrorCodes;
 import com.example.springsecurity.exception.BusinessException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -39,6 +41,17 @@ public class GlobalApiHandler implements ResponseBodyAdvice<Object> {
             }
             String code = ErrorCodeConstant.SUCCESS_CODE;
             String message = BusinessErrorCodes.SUCCESS.getMessage();
+            // String类型不能直接包装，所以要进行些特别的处理
+            if (returnType.getGenericParameterType().equals(String.class)) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                try {
+                    // 将数据包装在Result里后，再转换为json字符串响应给前端
+                    return objectMapper.writeValueAsString(new BaseResponseEntity<>(code, message, body));
+                } catch (JsonProcessingException e) {
+                    throw new BusinessException(BusinessErrorCodes.DEFAULT_BUSINESS_ERROR);
+                }
+            }
+
             return new BaseResponseEntity<>(code, message, body);
         }
     }

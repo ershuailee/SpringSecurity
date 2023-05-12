@@ -13,9 +13,11 @@ export function login(data: unknown) {
     })
 }
 
-export function test() {
+// 登出接口
+export function logout(data: unknown) {
     return service({
-        url: "/test",
+        url: "/user/logout",
         method: "GET",
+        data
     })
 }

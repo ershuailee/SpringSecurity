@@ -24,6 +24,11 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
 
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        response.setHeader("Access-Control-Max-Age", "3600");
+
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpStatus.OK.value());
         BaseResponseEntity<Object> baseResponseEntity = new BaseResponseEntity<>(ErrorCodeConstant.INVALID_TOKEN,

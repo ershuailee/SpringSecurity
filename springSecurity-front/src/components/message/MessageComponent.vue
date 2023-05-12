@@ -1,16 +1,14 @@
 <template>
-  <ul class="message-list">
-    <li
-        v-for="(item, index) in messageList"
-        :key="index"
-        :class="['message-item', setClass(item.type)]"
-    >
-      {{ item.title }}
-    </li>
-  </ul>
+  <div class="message-list">
+    <div v-for="(item, index) in messageList" :key="index" class="message-item" :class="setClass(item.type)">
+      <span>{{ item.title }}</span>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
+import {defineProps} from 'vue';
+
 interface MessageItem {
     type: string;
     title: string;
@@ -36,46 +34,76 @@ function setClass(type: string): string {
         return '';
     }
 }
+
 </script>
 
 <style lang="less" scoped>
 .message-list {
   position: fixed;
-
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   top: 24px;
   right: 24px;
   z-index: 1000;
-  max-width: 200px;
+  width: 300px;
   margin-bottom: 0;
-  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   .message-item {
+    position: relative;
     display: inline-block;
     padding: 12px 24px;
-    border: 1px solid #b3d0cf;
-    margin-left: 8px;
-    margin-bottom: 12px;
-    background-color: #e6f3ff;
-    font-size: 14px;
-    color: #007bff;
-    text-align: left;
-    box-shadow: 0 1px 1px 0 hsla(0, 0%, 80.4%, 0.5);
-    border-radius: 2px;
-    cursor: default;
+    background-color: #2020ce;
+    width: 300px;
+    font-size: 16px;
+    color: #303133;
+    text-align: center;
+    border-radius: 6px;
+    margin-bottom: 10px;
   }
 
   .message-info-item {
-    border: 1px solid #b3d0cf;
-    background-color: #e6f3ff;
-    color: #007bff;
+    border-color: #909399;
+    background-color: #ecf5ff;
+    color: #409EFF;
+  }
+
+  .message-success-item {
+    border-color: #e2eaf1;
+    background-color: #f0f9eb;
+    color: #67C23A;
+  }
+
+  .message-warning-item {
+    border-color: #f7d154;
+    background-color: #fdf6ec;
+    color: #E6A23C;
   }
 
   .message-error-item {
-    border: 1px solid #e99;
-    background-color: #f6e3e3;
-    color: #e33;
+    border-color: #f56c6c;
+    background-color: #fef0f0;
+    color: #F56C6C;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px;
+    margin: 2px;
+    font-size: 12px;
+    color: #ccc;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .close-btn:hover {
+    color: #fff;
   }
 }
 </style>

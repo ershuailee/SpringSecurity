@@ -1,22 +1,22 @@
 <template>
-    <div class="login">
-        <div class="login-header">
-            <h1>登&nbsp;陆</h1>
-        </div>
-        <form class="login-form">
-            <div class="form-group">
-                <label for="username">用户名</label>
-                <input type="text" id="username" v-model="username" />
-            </div>
-            <div class="form-group">
-                <label for="password">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
-                <input type="password" id="password" v-model="password" />
-            </div>
-            <div class="form-group">
-                <button class="login-button" @click.prevent="login">登&nbsp;陆</button>
-            </div>
-        </form>
+  <div class="login">
+    <div class="login-header">
+      <h1>登&nbsp;陆</h1>
     </div>
+    <form class="login-form">
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" id="username" v-model="username"/>
+      </div>
+      <div class="form-group">
+        <label for="password">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+        <input type="password" id="password" v-model="password"/>
+      </div>
+      <div class="form-group">
+        <button class="login-button" @click.prevent="login">登&nbsp;陆</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
