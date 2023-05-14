@@ -1,5 +1,4 @@
 import axios from "axios";
-import Message from "@/components/message";
 
 //创建axios实例
 const service = axios.create({
@@ -24,19 +23,17 @@ service.interceptors.request.use((config) => {
 
 //响应拦截：后端返回来的结果
 service.interceptors.response.use((res) => {
-        const code: string = res.data.code; // code 是后端的状态码
+        const code: string = res.data.code;
         switch (code) {
             case "0000":
                 return Promise.resolve(res.data);
             case "0001":
-                Message.error(res.data.message);
                 return Promise.reject(res.data.message);
             case "0002":
                 // 退出到登陆界面
                 localStorage.removeItem("token");
                 localStorage.removeItem("userInfo");
                 window.location.href = "/login";
-                Message.warning(res.data.message);
                 return Promise.reject(res.data.message);
             default:
                 return Promise.reject(res);
