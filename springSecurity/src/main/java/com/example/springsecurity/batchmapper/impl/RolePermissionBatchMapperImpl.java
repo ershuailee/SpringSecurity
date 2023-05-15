@@ -2,7 +2,7 @@ package com.example.springsecurity.batchmapper.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.springsecurity.batchmapper.RolePermissionBatchMapper;
-import com.example.springsecurity.entity.user.RolePermissionEntity;
+import com.example.springsecurity.pojo.entity.RolePermissionEntity;
 import com.example.springsecurity.mapper.RolePermissionMapper;
 import org.springframework.stereotype.Component;
 

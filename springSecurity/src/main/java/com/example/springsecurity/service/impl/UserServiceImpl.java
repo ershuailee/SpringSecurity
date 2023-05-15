@@ -4,18 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.springsecurity.batchmapper.UserBatchMapper;
-import com.example.springsecurity.dto.AuthRequestDTO;
-import com.example.springsecurity.dto.UserRegisterDTO;
-import com.example.springsecurity.entity.user.PermissionEntity;
-import com.example.springsecurity.entity.user.RoleEntity;
-import com.example.springsecurity.entity.user.UserEntity;
-import com.example.springsecurity.enums.BusinessErrorCodes;
-import com.example.springsecurity.exception.BusinessException;
+import com.example.springsecurity.pojo.dto.AuthRequestDTO;
+import com.example.springsecurity.pojo.dto.UserRegisterDTO;
+import com.example.springsecurity.pojo.entity.UserEntity;
+import com.example.springsecurity.common.enums.BusinessErrorCodes;
+import com.example.springsecurity.common.exception.BusinessException;
 import com.example.springsecurity.service.JWTService;
 import com.example.springsecurity.service.PermissionService;
 import com.example.springsecurity.service.RoleService;
 import com.example.springsecurity.service.UserService;
-import com.example.springsecurity.vo.AuthResponseVO;
+import com.example.springsecurity.pojo.vo.AuthResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,9 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>

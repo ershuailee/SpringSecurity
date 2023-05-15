@@ -1,8 +1,8 @@
 package com.example.springsecurity.service;
 
-import com.example.springsecurity.dto.RolePermissionDTO;
-import com.example.springsecurity.entity.user.RolePermissionEntity;
-import com.example.springsecurity.vo.RolePermissionVO;
+import com.example.springsecurity.pojo.dto.RolePermissionDTO;
+import com.example.springsecurity.pojo.entity.RolePermissionEntity;
+import com.example.springsecurity.pojo.vo.RolePermissionVO;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.springsecurity.entity.user;
+package com.example.springsecurity.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -9,23 +9,24 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 角色菜单关联表
+ * 用户角色关联表
  *
  * @author 李二帅
  */
 @Data
 @Accessors(chain = true)
-@TableName("role_permission")
-@ApiModel(value = "RolePermissionEntity对象", description = "角色菜单关联表")
-public class RolePermissionEntity {
+@TableName("user_role")
+@ApiModel(value = "UserRoleEntity对象", description = "用户角色关联表")
+public class UserRoleEntity {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "用户id")
+    @TableId(value = "user_id", type = IdType.NONE)
+    private Long userId;
+
     @ApiModelProperty(value = "角色id")
-    @TableId(value = "role_id", type = IdType.NONE)
     private Long roleId;
 
-    @ApiModelProperty(value = "菜单id")
-    private Long permissionId;
 
 }

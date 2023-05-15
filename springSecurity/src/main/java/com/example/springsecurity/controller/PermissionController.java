@@ -1,8 +1,8 @@
 package com.example.springsecurity.controller;
 
-import com.example.springsecurity.dto.PermissionDTO;
+import com.example.springsecurity.pojo.dto.PermissionDTO;
 import com.example.springsecurity.service.PermissionService;
-import com.example.springsecurity.vo.PermissionTreeVO;
+import com.example.springsecurity.pojo.vo.PermissionTreeVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;

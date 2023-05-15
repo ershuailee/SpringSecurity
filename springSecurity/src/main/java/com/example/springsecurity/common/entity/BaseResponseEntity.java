@@ -1,4 +1,4 @@
-package com.example.springsecurity.entity.common;
+package com.example.springsecurity.common.entity;
 
 import lombok.Data;
 

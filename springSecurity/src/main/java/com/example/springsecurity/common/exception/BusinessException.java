@@ -1,6 +1,6 @@
-package com.example.springsecurity.exception;
+package com.example.springsecurity.common.exception;
 
-import com.example.springsecurity.enums.BusinessErrorCodes;
+import com.example.springsecurity.common.enums.BusinessErrorCodes;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

@@ -1,9 +1,9 @@
 package com.example.springsecurity.controller;
 
-import com.example.springsecurity.dto.AuthRequestDTO;
-import com.example.springsecurity.dto.UserRegisterDTO;
+import com.example.springsecurity.pojo.dto.AuthRequestDTO;
+import com.example.springsecurity.pojo.dto.UserRegisterDTO;
 import com.example.springsecurity.service.UserService;
-import com.example.springsecurity.vo.AuthResponseVO;
+import com.example.springsecurity.pojo.vo.AuthResponseVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;

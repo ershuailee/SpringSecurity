@@ -1,7 +1,7 @@
 package com.example.springsecurity.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.springsecurity.entity.user.UserRoleEntity;
+import com.example.springsecurity.pojo.entity.UserRoleEntity;
 
 /**
  * <p>

@@ -1,4 +1,4 @@
-package com.example.springsecurity.dto;
+package com.example.springsecurity.pojo.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

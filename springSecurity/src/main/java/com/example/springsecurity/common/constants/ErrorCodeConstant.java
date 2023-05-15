@@ -1,4 +1,4 @@
-package com.example.springsecurity.constants;
+package com.example.springsecurity.common.constants;
 
 public class ErrorCodeConstant {
 

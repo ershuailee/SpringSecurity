@@ -1,6 +1,6 @@
 package com.example.springsecurity.service;
 
-import com.example.springsecurity.entity.user.RoleEntity;
+import com.example.springsecurity.pojo.entity.RoleEntity;
 
 import java.util.Collection;
 import java.util.List;

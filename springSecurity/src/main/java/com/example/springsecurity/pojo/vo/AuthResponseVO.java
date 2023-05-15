@@ -1,4 +1,4 @@
-package com.example.springsecurity.vo;
+package com.example.springsecurity.pojo.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

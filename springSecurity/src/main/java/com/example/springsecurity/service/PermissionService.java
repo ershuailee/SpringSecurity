@@ -1,7 +1,7 @@
 package com.example.springsecurity.service;
 
-import com.example.springsecurity.dto.PermissionDTO;
-import com.example.springsecurity.vo.PermissionTreeVO;
+import com.example.springsecurity.pojo.dto.PermissionDTO;
+import com.example.springsecurity.pojo.vo.PermissionTreeVO;
 
 import java.util.List;
 

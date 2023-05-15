@@ -1,6 +1,7 @@
-package com.example.springsecurity.dto;
+package com.example.springsecurity.pojo.entity;
 
-import com.example.springsecurity.entity.common.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.springsecurity.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,8 +16,9 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value = "PermissionDTO", description = "菜单表")
-public class PermissionDTO extends BaseEntity {
+@TableName("permission")
+@ApiModel(value = "PermissionEntity对象", description = "菜单表")
+public class PermissionEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,4 +51,5 @@ public class PermissionDTO extends BaseEntity {
 
     @ApiModelProperty(value = "节点类型: 0目录，1菜单，2按钮")
     private Integer nodeType;
+
 }

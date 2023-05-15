@@ -1,9 +1,9 @@
 package com.example.springsecurity.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.example.springsecurity.constants.ErrorCodeConstant;
-import com.example.springsecurity.entity.common.BaseResponseEntity;
-import com.example.springsecurity.enums.BusinessErrorCodes;
+import com.example.springsecurity.common.constants.ErrorCodeConstant;
+import com.example.springsecurity.common.entity.BaseResponseEntity;
+import com.example.springsecurity.common.enums.BusinessErrorCodes;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

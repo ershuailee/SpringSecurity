@@ -1,6 +1,6 @@
-package com.example.springsecurity.vo;
+package com.example.springsecurity.pojo.vo;
 
-import com.example.springsecurity.entity.common.BaseEntity;
+import com.example.springsecurity.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

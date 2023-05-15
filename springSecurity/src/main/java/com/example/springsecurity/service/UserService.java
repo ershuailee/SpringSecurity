@@ -1,11 +1,8 @@
 package com.example.springsecurity.service;
 
-import com.example.springsecurity.dto.AuthRequestDTO;
-import com.example.springsecurity.dto.UserRegisterDTO;
-import com.example.springsecurity.entity.user.PermissionEntity;
-import com.example.springsecurity.vo.AuthResponseVO;
-
-import java.util.List;
+import com.example.springsecurity.pojo.dto.AuthRequestDTO;
+import com.example.springsecurity.pojo.dto.UserRegisterDTO;
+import com.example.springsecurity.pojo.vo.AuthResponseVO;
 
 /**
  * <p>

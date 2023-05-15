@@ -1,4 +1,4 @@
-package com.example.springsecurity.enums;
+package com.example.springsecurity.common.enums;
 
 import lombok.Getter;
 

@@ -1,7 +1,7 @@
 package com.example.springsecurity.batchmapper;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.springsecurity.entity.user.RolePermissionEntity;
+import com.example.springsecurity.pojo.entity.RolePermissionEntity;
 
 /**
  * <p>

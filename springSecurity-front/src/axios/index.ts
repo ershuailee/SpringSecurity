@@ -11,10 +11,8 @@ const service = axios.create({
 
 // 请求拦截：请求接口的时候，先拦截下来，对你的数据做一个判断，或者携带个token给你
 service.interceptors.request.use((config) => {
-    if (config.headers.Authorization !== null) { // 只有Authorization不为null才添加token
-        if (localStorage.getItem("token")) {
-            config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
-        }
+    if (localStorage.getItem("token")) {
+        config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
     }
     return config;
 }, error => {

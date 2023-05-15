@@ -1,4 +1,4 @@
-package com.example.springsecurity.entity.user;
+package com.example.springsecurity.pojo.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

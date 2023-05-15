@@ -1,10 +1,10 @@
 package com.example.springsecurity.filter;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.springsecurity.constants.ErrorCodeConstant;
-import com.example.springsecurity.entity.common.BaseResponseEntity;
-import com.example.springsecurity.entity.user.UserInfo;
-import com.example.springsecurity.enums.BusinessErrorCodes;
+import com.example.springsecurity.common.constants.ErrorCodeConstant;
+import com.example.springsecurity.common.entity.BaseResponseEntity;
+import com.example.springsecurity.pojo.entity.UserInfo;
+import com.example.springsecurity.common.enums.BusinessErrorCodes;
 import com.example.springsecurity.service.JWTService;
 import com.example.springsecurity.service.impl.SysUserService;
 import lombok.extern.slf4j.Slf4j;
